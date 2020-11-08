@@ -34,7 +34,7 @@ This project emphasizes the use of using Javascript, jQuery & AJAX to make dynam
 + A search history
     - This will display the recent search of user
     - When clicked of the users desired city, display react to the cities clicked inside the search history
-     ![Screenshotdisplay]()
+     ![Screenshotdisplay](https://github.com/sanjay1626/Weather-Dashboard/blob/main/assests/screenshot3.jpg)
 # Languages
   + HTML
   + JavaScript
