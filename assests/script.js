@@ -1,12 +1,10 @@
 $("#search-button").on("click", function weather(search){
     search.preventDefault();
     //Need a variable to store city
-    var city = "";
-    var clickcity = [];
+   
     //var declaration
     var searchCity = $("#search-city").val();
-    var searchButton = $("#search-button");
-    var listEL = event.target;
+
     console.log(searchCity)
     //Using AJAX search input
     var APIKey = "a0aca8a89948154a4182dcecc780b513";
@@ -114,10 +112,53 @@ function store(){
     ///need to display data even page gets refresh
 
     $("lg").on("click", function(city){
-       alert($("ul lg").value)
-     
+        var liEl=city.target;
+        if (city.target.matches("lg")){
+          var  city=liEl.textContent.trim();
+          console.log(city)  
+        
+        var searchCity = city;
+
+        console.log(searchCity)
+        //Using AJAX search input
+        var APIKey = "791cda9eee227670805a4f8b0c70d2de";
+        var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + searchCity + "&APPID=" + APIKey;
+       
+        //Call
+        $.ajax({
+            url:queryURL,
+            method: "GET"
+        }).then(function(res){
+            console.log(res)
+           
+         
+    
+            //to display weather icon beside City name
+            var weathericon = res.weather[0].icon
+            var iconurl = "https://openweathermap.org/img/wn/"+ weathericon +"@2x.png";
+            var date=new Date(res.dt*1000).toLocaleDateString();
+            var tempF = (res.main.temp - 273.15) * 1.80 + 32;
+            var ws=res.wind.speed;
+            var windsmph=(ws*2.237).toFixed(1);
+    
+           
+    
+            //Display results current-weather
+            $("#current-city").html(res.name + "("+date+")" + "<img src="+ iconurl + ">");
+            $("#temperature").html((tempF).toFixed(2) +"&#8457");
+            $("#humidity").html(res.main.humidity + "%");
+            $("#wind").html(windsmph +"MPH");
+            UVIndex(res.coord.lon,res.coord.lat);
+            forcast(searchCity);
+            //store();
+        })
+    }
         //var clickcity = city[city.length - 1];
   })
 }
 
+// display the past search again when the list group item is clicked in search history
+function invokePastSearch(event){
+   
 
+}
