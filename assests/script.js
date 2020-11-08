@@ -157,8 +157,3 @@ function store(){
   })
 }
 
-// display the past search again when the list group item is clicked in search history
-function invokePastSearch(event){
-   
-
-}
